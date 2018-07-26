@@ -1,4 +1,3 @@
-
 <?php
 
 echo "Наследование это механизм языка ООП, который позволяет избегать дублирование кода при написании классов, а также прописывать общие свойства и методы для всех объектов дочерных классов. <br>
@@ -6,10 +5,21 @@ echo "Наследование это механизм языка ООП, кот
 
  echo "Главное различие между интерфейсом и астрактным классом состоит в том что в интерфейсе полностью отсутствует реализация методов. Абстрактные классы нужны для описания общих методов, которые используются в классовых семьях. Интерфейс нужен для описания общих методов, которые реализуются в конкретном классе. <br><br>";
 
-class Transport {
+class Company
+{
   public $name;
   public $color;
   public $type;
+
+  function __construct(
+    $name,
+    $color,
+    $type)
+  {
+    $this->name = $name;
+    $this->color = $color;
+    $this->type = $type;
+  }
 }
 
 interface IntfaceCar
@@ -17,160 +27,129 @@ interface IntfaceCar
  public function getCar();
 }
 
-class Car extends Transport implements IntfaceCar {
-  public $color = 'black';
-  public $type = 'sedan';
-  public function getCar() {
-    if ($this->color) {
-      return  $color = 'blue';
-    }
-    else {
-      return $color;
-    }
-  }
-}
+ class Car extends Company implements IntfaceCar
+ {
+   public function getCar()
+   {
+     if ($this->color == 'black')
+     {
+       return  $color = 'blue';
+     }
+     else
+     {
+       return $this->color;
+     }
+   }
+ }
 
-$lada = new Car();
-$lada->name = 'LadaNine';
-$lada->getCar() . '<br>';
-$lada->color;
+ $lada = new Car('LadaNine', 'black', 'sedan');
+ $lada->getCar() . '<br>';
 
-$reno = new Car();
-$reno->name = 'Renault_Megane';
-$reno->color ='gray';
+ $reno = new Car('Renault_Megane', 'gray', 'sedan');
 
-echo $lada->name . '<br>';
-echo $lada->type . '<br>';
-echo $lada->getCar() . '<br>';
-echo $lada->color . '<br>';
+ echo $lada->name . '<br>';
+ echo $lada->type . '<br>';
+ echo $lada->getCar() . '<br>';
+ echo $lada->color . '<br>';
 
-echo $reno->name . '<br>';
-echo $reno->type . '<br>';
-echo $reno->color . '<br><br>';
+ echo $reno->name . '<br>';
+ echo $reno->type . '<br>';
+ echo $reno->color . '<br><br>';
+
+ interface IntfaceTv
+ {
+   public function getTelevision();
+ }
 
 
-class Equipment
-{
-  public $color;
-  public $name;
-  public $diagonal;
-}
+ class Television extends Company implements IntfaceTv
+ {
+   public $diagonal = 28;
+   public function getTelevision()
+   {
+     $this->diagonal = 32;
+   }
+ }
 
-interface IntfaceTv
-{
-  public function getTelevision();
-}
+ $tv1 = new Television('gray', 'Samsung_bw265739', '');
+ $tv1->diagonal;
 
-class Television extends Equipment implements IntfaceTv {
-  public $diagonal = 28;
-  public function getTelevision() {
-    $this->diagonal = 32;
-  }
-}
+ $tv2 = new Television('black', 'LG_hc6811387', '');
+ $tv2->getTelevision();
+ $tv2->diagonal;
 
-$tv1 = new Television();
-$tv1->name = 'Samsung_bw265739';
-$tv1->color = 'gray';
-$tv1->diagonal;
+ echo $tv1->name . '<br>';
+ echo $tv1->color . '<br>';
+ echo $tv1->diagonal . '<br>';
+ echo $tv2->name . '<br>';
+ echo $tv2->color . '<br>';
+ echo $tv2->diagonal . '<br><br>';
 
-$tv2 = new Television();
-$tv2->getTelevision();
-$tv2->name = 'LG_hc6811387';
-$tv2->color = 'black';
-$tv2->diagonal;
+ interface IntfacePen
+ {
+   public function getPen();
+ }
 
-echo $tv1->name . '<br>';
-echo $tv1->color . '<br>';
-echo $tv1->diagonal . '<br>';
-echo $tv2->name . '<br>';
-echo $tv2->color . '<br>';
-echo $tv2->diagonal . '<br><br>';
+ class Pen extends Company implements IntfacePen
+ {
+   public function getPen()
+   {
+     if ($this->color == 'black')
+     {
+     return  $color = 'multicolor';
+     }
+     else
+     {
+       return $color = 'green';
+     }
+   }
+ }
 
-class Instrument {
-  public $type;
-}
-interface IntfacePen
-{
-  public function getPen();
-}
+ $pen1 = new Pen('', 'black', '');
+ $pen2 = new Pen('', 'red', '');
+ $pen1->getPen();
+ $pen2->getPen();
 
-class Pen extends Instrument implements IntfacePen {
-  public $color;
-  public $type = 'Pen';
-  public function getPen() {
-    if ($this->color == 'black') {
-    return  $color = 'multicolor';
-    }
-    else {
-      return $color = 'green';
-    }
-  }
-}
+ echo $pen1->color . '<br>';
+ echo $pen1->getPen() . '<br>';
+ echo $pen2->color . '<br>';
+ echo $pen2->getPen() . '<br><br>';
 
-$pen1 = new Pen();
-$pen2 = new Pen();
-$pen1->color = 'black';
-$pen1->getPen();
-$pen2->color = 'red';
-$pen2->getPen();
+ class Duck extends Company
+ {
+ }
 
-echo $pen1->color . '<br>';
-echo $pen2->color . '<br>';
-echo $pen1->getPen() . '<br>';
-echo $pen2->getPen() . '<br><br>';
+ $duck1 = new Duck('', '', 'Wood');
+ $duck1->type;
+ $duck2 = new Duck('', '', 'Domestic');
+ $duck2->type;
 
-class Bird {
-public $class;
-public $type;
-}
-interface IntfaceDuck
-{
-  public function getDuck();
-}
+ echo $duck1->type . '<br>';
+ echo $duck2->type . '<br><br>';
 
-class Duck extends Bird implements IntfaceDuck {
-  public $class = 'Duck';
-  public $type = 'Domestic';
-  public function getDuck() {
-    $this->type = 'Wood';
-  }
-}
-
-$duck1 = new Duck();
-$duck1->getDuck();
-$duck1->type;
-$duck2 = new Duck();
-$duck2->type;
-
-echo $duck1->type . '<br>';
-echo $duck2->type . '<br><br>';
-
-class Resource {
-  public $name;
-  public $type;
-}
-
-interface IntfaceProd
+ interface IntfaceProd
 {
   public function getProduct();
 }
 
-class Product extends Resource implements IntfaceProd {
-  private $price = 500;
-  public function getProduct() {
-    $this->name = 'Asus_Geforce_GTX1060' ;
-  }
-}
-$product1 = new Product();
-$product2 = new Product();
-$product1->name = 'Intel_4770';
-$product2->name = 'Gigabyte_Geforce_GTX980';
-$product2->getProduct();
-$product1->type = CPU;
-$product2->type = GPU;
+ class Product extends Company implements IntfaceProd
+ {
+   private $price = 500;
+   public function getProduct()
+   {
+     if ($this->name == 'Gigabyte_Geforce_GTX980')
+     {
+       return $name = 'Asus_Geforce_GTX1060';
+     }
+   }
+ }
+ $product1 = new Product('Intel_4770', '', 'CPU');
+ $product2 = new Product('Gigabyte_Geforce_GTX980', '', 'GPU');
+ $product2->getProduct();
 
-echo $product1->name . '<br>';
-echo $product1->type . '<br>';
-echo $product2->name . '<br>';
-echo $product2->type . '<br>';
- ?>
+
+ echo $product1->name . '<br>';
+ echo $product1->type . '<br>';
+ echo $product2->name . '<br>';
+ echo $product2->type . '<br>';
+ echo $product2->getProduct();
